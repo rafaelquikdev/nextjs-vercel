@@ -9,7 +9,7 @@ export default async (req, res) => {
       res.json({ status: 200, name: 'success', message: lots})
     } else if (req.method === 'POST') {
       const errors = bodyValidation(req.body)
-      if (errors.length > 0) {
+      if (errors) {
         return res.json({ status: 422, name: 'VALIDATION_ERROR', message: errors})
       }
       lots.push(req.body)
@@ -23,18 +23,9 @@ export default async (req, res) => {
 }
 
 const bodyValidation = (body) => {
-  const errors = []
-  if (!body.enterprise) {
-    errors.push('enterprise is required')
-  }
-  if (!body.court) {
-    errors.push('court is required')
-  }
-  if (!body.lot) {
-    errors.push('lot is required')
-  }
-  if (!body.price) {
-    errors.push('price is required')
+  let errors = ''
+  if (!body.enterprise || !body.court || !body.lot || !body.price) {
+    errors += 'enterprise/court/lot/price are required'
   }
   return errors
 }
