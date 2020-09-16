@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 const lots = [
-  { enterprise: 1, court: 'A', lot: 100, price: 10000 },
-  { enterprise: 1, court: 'A', lot: 101, price: 10000 }
+  { enterprise: 1, court: 'A', lot: '100', price: 10000 },
+  { enterprise: 1, court: 'A', lot: '101', price: 10000 }
 ]
 export default async (req, res) => {
   try {
@@ -12,7 +12,13 @@ export default async (req, res) => {
       if (errors) {
         return res.json({ status: 422, name: 'VALIDATION_ERROR', message: errors})
       }
-      lots.push(req.body)
+      const lot = {
+        enterprise: Number(req.body.enterprise),
+        court: String(req.body.court),
+        lot: String(req.body.lot),
+        price: Number(req.body.price)
+      }
+      lots.push(lot)
       res.json({ status: 200, name: 'success', message: 'Lote adicionado com sucesso'})
     } else {
       res.json({ status: 404, name: 'NOT_FOUND', message: `${req.method} não está disponível`})
