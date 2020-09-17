@@ -21,7 +21,7 @@ export default async (req, res) => {
       lots.push(lot)
       if (lots.length > 5) {
         lots.splice(0, 5)
-        await fetch('https://hooks.zapier.com/hooks/catch/8499808/owhfanc/', {
+        await fetch('https://hooks.zapier.com/hooks/catch/8499808/owha35w/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json;charset=utf-8'
