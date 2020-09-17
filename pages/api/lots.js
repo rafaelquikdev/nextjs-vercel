@@ -21,6 +21,13 @@ export default async (req, res) => {
       lots.push(lot)
       if (lots.length > 5) {
         lots.splice(0, 5)
+        await fetch('https://hooks.zapier.com/hooks/catch/8499808/owhfanc/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          },
+          body: JSON.stringify({ status: 'Os primeiros 5 lotes foram removidos' })
+        })
       }
       res.json({ status: 200, name: 'success', message: 'Lote adicionado com sucesso'})
     } else {
