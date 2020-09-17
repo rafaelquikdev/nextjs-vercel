@@ -19,6 +19,9 @@ export default async (req, res) => {
         price: Number(req.body.price)
       }
       lots.push(lot)
+      if (lots.length > 5) {
+        lots.splice(0, 5)
+      }
       res.json({ status: 200, name: 'success', message: 'Lote adicionado com sucesso'})
     } else {
       res.json({ status: 404, name: 'NOT_FOUND', message: `${req.method} não está disponível`})
