@@ -19,9 +19,9 @@ export default async (req, res) => {
         price: Number(req.body.price)
       }
       lots.push(lot)
-      if (lots.length > 5) {
+      if (lots.length > 5) { // trigger new message
         lots.splice(0, 5)
-        await fetch('https://hooks.zapier.com/hooks/catch/8499808/owha35w/', {
+        await fetch(process.env.ZAPIER_WEBHOOK, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json;charset=utf-8'
